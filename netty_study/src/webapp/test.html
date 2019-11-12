@@ -7,11 +7,11 @@
 <body>
 <script type="text/javascript">
     var socket;
-    if (window.WebSocket){
+    if (window.WebSocket) {
         socket = new WebSocket("ws://localhost:8099/test");
         socket.onmessage = function (ev) {
             var ta = document.getElementById("reponseText");
-            ta.value = ta.value + "\n" +ev.data;
+            ta.value = ta.value + "\n" + ev.data;
         }
         socket.onopen = function (ev) {
             var ta = document.getElementById("reponseText");
@@ -19,20 +19,21 @@
         }
         socket.onclose = function (ev) {
             var ta = document.getElementById("reponseText");
-            ta.value = ta.value+"連接關閉！";
+            ta.value = ta.value + "連接關閉！";
         }
 
-    }else {
+    } else {
         alert("瀏覽器不支持websocket");
     }
-    function send(message){
-        if (!window.WebSocket){
+
+    function send(message) {
+        if (!window.WebSocket) {
             return;
         }
 
-        if (socket.readyState==WebSocket.OPEN){
+        if (socket.readyState == WebSocket.OPEN) {
             socket.send(message);
-        }else {
+        } else {
             alert("連接尚未開啓！")
         }
     }
